@@ -1,15 +1,20 @@
-enum Scene {
+pub enum Scene {
     EX1,
 }
 
-struct RayTracer {
+pub struct RayTracer {
     scene: Scene,
 }
 
 impl RayTracer {
-    pub fn ray_trace(&self) {
+    pub fn new() -> Self {
+        Self {
+            scene: Scene::EX1,
+        }
+    }
+    pub fn render(&self) {
         let mut imgbuf = self.setup();
-        self.render(&mut imgbuf);
+        self.trace_rays(&mut imgbuf);
         self.save_image(&imgbuf);
     }
 
@@ -20,7 +25,7 @@ impl RayTracer {
         imgbuf
     }
 
-    fn render(&self, imgbuf: &mut image::ImageBuffer<image::Rgb<u8>, Vec<u8>>) {
+    fn trace_rays(&self, imgbuf: &mut image::ImageBuffer<image::Rgb<u8>, Vec<u8>>) {
         for (x, y, pixel) in imgbuf.enumerate_pixels_mut() {
             let (r, g, b) = self.calculate_color(x, y);
             *pixel = image::Rgb([r, g, b]);

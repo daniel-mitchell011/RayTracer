@@ -1,7 +1,7 @@
-mod chapter2;
+mod RayTracer;
 
-use chapter2::ray_trace;
 
 fn main() {
-    ray_trace();
+    let ray_tracer = RayTracer::RayTracer::new();
+    ray_tracer.render();
 }
