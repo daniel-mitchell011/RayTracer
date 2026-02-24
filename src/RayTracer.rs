@@ -8,9 +8,7 @@ pub struct RayTracer {
 
 impl RayTracer {
     pub fn new() -> Self {
-        Self {
-            scene: Scene::EX1,
-        }
+        Self { scene: Scene::EX1 }
     }
     pub fn render(&self) {
         let mut imgbuf = self.setup();
@@ -34,11 +32,15 @@ impl RayTracer {
 
     fn calculate_color(&self, x: u32, y: u32) -> (u8, u8, u8) {
         match self.scene {
-            Scene::EX1 => (128 as u8, 128 as u8, 128 as u8),
+            Scene::EX1 => self.scene_1(x, y),
         }
     }
 
     fn save_image(&self, imgbuf: &image::ImageBuffer<image::Rgb<u8>, Vec<u8>>) {
         let _ = imgbuf.save("raytraced.png").unwrap();
+    }
+
+    fn scene_1(&self, _x: u32, _y: u32) -> (u8, u8, u8) {
+        (128 as u8, 128 as u8, 128 as u8)
     }
 }
